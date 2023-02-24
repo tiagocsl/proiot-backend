@@ -49,8 +49,8 @@ export default class Device {
         return {
             id: this._id,
             ...this._deviceProps,
-            createdDate: this.createdDate,
-            updatedDate: this.updatedDate,
+            createdDate: this._createdDate,
+            updatedDate: this._updatedDate,
         };
     }
 }
