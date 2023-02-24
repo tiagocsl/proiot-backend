@@ -1,12 +1,12 @@
-import { DeviceInformation } from './interface/device.interface';
+import { DeviceProps } from 'entities/interfaces/device.interface';
 
 export default class Device {
     _id?: string;
-    private _deviceProps: Required<DeviceInformation>;
+    private _deviceProps: Required<DeviceProps>;
     private _createdDate: Date;
     private _updatedDate: Date;
 
-    constructor(deviceProps: DeviceInformation) {
+    constructor(deviceProps: DeviceProps) {
         this._deviceProps.name = deviceProps.name;
         const description = deviceProps.description;
         this._deviceProps.description = description ? description : null;

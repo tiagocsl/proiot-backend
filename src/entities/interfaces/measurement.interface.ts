@@ -1,4 +1,4 @@
-import { UnitySimbols } from 'entity/type/measurement.types';
+import { UnitySimbols } from 'entities/types/measurement.types';
 
 export interface MeasurementData {
     value: number;

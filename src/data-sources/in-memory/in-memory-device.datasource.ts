@@ -2,9 +2,9 @@
 import {
     DeviceRequestModel,
     DeviceResponseModel,
-} from '../../models/device.interface';
-import { DeviceDataSource } from '../interfaces/device-datasource.interface';
-import { InMemoryDatabaseWrapper } from '../interfaces/in-memory-wrapper.interface';
+} from 'models/device.interface';
+import { DeviceDataSource } from 'data-sources/interfaces/device-datasource.interface';
+import { InMemoryDatabaseWrapper } from 'data-sources/interfaces/in-memory-wrapper.interface';
 
 export class InMemoryDeviceDataSource implements DeviceDataSource {
     private db: InMemoryDatabaseWrapper;

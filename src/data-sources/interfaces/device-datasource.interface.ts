@@ -2,7 +2,7 @@
 import {
     DeviceRequestModel,
     DeviceResponseModel,
-} from '../../models/device.interface';
+} from 'models/device.interface';
 
 export interface DeviceDataSource {
     create(device: DeviceRequestModel): void;

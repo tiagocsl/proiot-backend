@@ -1,4 +1,4 @@
-import { MeasurementData } from './interface/measurement.interface';
+import { MeasurementData } from 'entities/interfaces/measurement.interface';
 
 export default class Measurement {
     _id: string;
