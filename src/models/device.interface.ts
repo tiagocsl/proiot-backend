@@ -1,6 +1,6 @@
 export interface DeviceRequestModel {
     name: string;
-    description?: string;
+    description?: string | null;
 }
 
 export interface DeviceResponseModel {
