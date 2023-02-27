@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import morgan from 'morgan';
-import Logger from '../utils/logger';
+import Logger from '../../utils/logger';
 
 const stream = {
     write: (message: any) => Logger.http(message),

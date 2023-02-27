@@ -1,0 +1,285 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "proiot",
+        "version": "1.0",
+        "description": "",
+        "contact": {
+            "name": "Tiago Castro de Souza Lima",
+            "email": "tiago.csouzalima@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/devices": {
+            "parameters": [],
+            "get": {
+                "summary": "Get All Devices",
+                "tags": [],
+                "responses": {
+                    "200": {
+                        "description": "All devices",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Device"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                },
+                "operationId": "get-device-alldevices",
+                "description": "Returns all registered devices."
+            },
+            "post": {
+                "summary": "Register New Device",
+                "operationId": "post-devices",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "description": "Register a new device in the system.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["name", "description"]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/devices/:deviceid": {
+            "parameters": [],
+            "get": {
+                "summary": "Get device with specified ID",
+                "operationId": "get-devices-:devicesid",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "description": "Return device data with specified deviceID"
+            },
+            "delete": {
+                "summary": "Delete device with specified ID",
+                "operationId": "delete-devices-:deviceid",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "description": "Delete device data with specified deviceID"
+            },
+            "patch": {
+                "summary": "Update device with specified ID",
+                "operationId": "patch-devices-:deviceid",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "description": "Update partial data of the specified device."
+            }
+        },
+        "/devices/:deviceid/measurements": {
+            "get": {
+                "summary": "Get all measurements by deviceid",
+                "tags": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MeasurementResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "get-devices-:deviceid-measurements",
+                "description": "Return all measurements of the specified device."
+            },
+            "delete": {
+                "summary": "Delete all measurement by deviceid",
+                "operationId": "delete-devices-:deviceid-measurements",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Send new measurement by deviceid",
+                "operationId": "post-devices-:deviceid-measurements",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "description": "Send new measurement to system.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "x-examples": {
+                                    "Example 1": {
+                                        "value": 123,
+                                        "unity": "UnitySimbols",
+                                        "deviceId": "string",
+                                        "measureType": "string"
+                                    }
+                                },
+                                "properties": {
+                                    "value": {
+                                        "type": "integer"
+                                    },
+                                    "unity": {
+                                        "type": "string",
+                                        "enum": [
+                                            "'ºC' | 'ºF' | '%' | 'm/s' | 'kWh'"
+                                        ],
+                                        "example": "'ºC' | 'ºF' | '%' | 'm/s' | 'kWh'"
+                                    },
+                                    "deviceId": {
+                                        "type": "string"
+                                    },
+                                    "measureType": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "value",
+                                    "unity",
+                                    "deviceId",
+                                    "measureType"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/devices/:deviceid/measurements/:id": {
+            "get": {
+                "summary": "Get one measurement by deviceid by measureId",
+                "tags": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MeasurementResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "get-devices-:deviceid-measurements-:id"
+            },
+            "delete": {
+                "summary": "Delete one measurement by deviceid by measureId",
+                "operationId": "delete-devices-:deviceid-measurements-:id",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Device": {
+                "title": "Device",
+                "type": "object",
+                "x-examples": {},
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Unique identifier for the given user."
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "createdDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "updatedDate": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                "required": ["id", "name", "description", "createdDate"],
+                "x-stoplight": {
+                    "id": "e01368ac1197b"
+                }
+            },
+            "MeasurementResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "deviceId": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "integer"
+                    },
+                    "unity": {
+                        "type": "string"
+                    },
+                    "measureType": {
+                        "type": "string"
+                    },
+                    "verboseValue": {
+                        "type": "string"
+                    },
+                    "measureDate": {
+                        "type": "string"
+                    }
+                },
+                "x-examples": {
+                    "Example 1": {
+                        "id": "63fabcedabe6207c7b44e092",
+                        "deviceId": "63fa1b5b5242c7b165066f17",
+                        "value": 73,
+                        "unity": "%",
+                        "measureType": "Bateria",
+                        "verboseValue": "73 %",
+                        "measureDate": "2023-02-26T01:59:09.719Z"
+                    }
+                }
+            }
+        }
+    }
+}

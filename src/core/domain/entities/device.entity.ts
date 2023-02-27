@@ -1,4 +1,4 @@
-import { DeviceProps } from './interfaces/device.interface';
+import { DeviceProps } from '../../src/core/domain/interfaces/device.interface';
 
 export default class Device {
     _id?: string;
